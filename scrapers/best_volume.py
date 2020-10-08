@@ -2,6 +2,7 @@ from selenium.webdriver import Chrome, ChromeOptions
 import bs4
 import re
 from time import sleep
+# from games.models import BetsVolume
 from games.models import BetsVolume
 
 
@@ -39,7 +40,7 @@ class Volume:
         soup = bs4.BeautifulSoup(html, 'html.parser')
         matches = soup.find_all(class_=re.compile('IH2Satir'))
 
-        BetsVolume.objects.all().delete()
+        # BetsVolume.objects.all().delete()
 
         the_bulk = []
 
@@ -85,7 +86,8 @@ class Volume:
                                        away_team=away_team, final_bet=final_bet,
                                        odds=odds, amount=amount))
 
-        BetsVolume.objects.bulk_create()
+        [print(x) for x in the_bulk]
+        # BetsVolume.objects.bulk_create()
 
         #     cursor.execute('INSERT INTO VolumeGames(day, time, home_team, away_team, bet_sign,'
         #                    ' odd, volume) VALUES (?, ?, ?, ?, ?, ?, ?)',

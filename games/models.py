@@ -4,7 +4,7 @@ from django.db import models
 
 
 class BetsVolume(models.Model):
-    day = models.CharField()
+    day = models.CharField(max_length=15)
     time = models.TimeField()
     home_team = models.CharField(max_length=60)
     away_team = models.CharField(max_length=60)
