@@ -12,7 +12,6 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 django.setup()
 application = get_wsgi_application()
 
-
 from games.models import BetsVolume
 
 
@@ -65,6 +64,8 @@ def scrape():
         position_pattern = r'[s][p][a][n]\>[ ](\d{1})\<\/[d][i]'
         position = re.search(position_pattern, position_token)
         final_bet = position.group(1)
+        if final_bet == '0':
+            final_bet = 'X'
 
         # GET THE ODD
         odds_token = str(elements[4])
@@ -76,7 +77,7 @@ def scrape():
         amount_token = str(elements[5])
         amount_pattern = r'[o][n][g]\>(.+)[ ][A-z]+'
         amount = re.search(amount_pattern, amount_token)
-        total_amount = amount.group(1).
+        total_amount = amount.group(1)
 
         the_bulk.append(BetsVolume(day=day, time=time, home_team=home_team,
                                    away_team=away_team, final_bet=final_bet,
