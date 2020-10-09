@@ -40,8 +40,6 @@ def scrape():
     soup = BeautifulSoup(html, 'html.parser')
     matches = soup.find_all(class_=re.compile('IH2Satir'))
 
-    BetsVolume.objects.all().delete()
-
     the_bulk = []
 
     for game in matches:
@@ -78,12 +76,13 @@ def scrape():
         amount_token = str(elements[5])
         amount_pattern = r'[o][n][g]\>(.+)[ ][A-z]+'
         amount = re.search(amount_pattern, amount_token)
-        total_amount = amount.group(1).replace(',', '')
+        total_amount = amount.group(1).
 
         the_bulk.append(BetsVolume(day=day, time=time, home_team=home_team,
                                    away_team=away_team, final_bet=final_bet,
                                    odds=odds, amount=total_amount))
 
+    BetsVolume.objects.all().delete()
     BetsVolume.objects.bulk_create(the_bulk)
 
 

@@ -10,7 +10,7 @@ class BetsVolume(models.Model):
     away_team = models.CharField(max_length=60)
     final_bet = models.CharField(max_length=1)
     odds = models.FloatField()
-    amount = models.IntegerField()
+    amount = models.CharField(max_length=30)
 
     def __str__(self):
         return f'{self.home_team} - {self.away_team} - ' \
