@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'games',
     'django_celery_beat',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '/static/')]
+
+CELERY_BROKER_URL = 'redis://h:p79441e9adc621380cc206a1cb29ba8fe1e9e15c40c26a68b4a88c9a3ad967b07@ec2-52-49-10-190.eu-west-1.compute.amazonaws.com:24409'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+#CELERY_RESULT_BACKEND = 'bet-assist-db'
+CELERY_CACHE_BACKEND = 'django-cache'

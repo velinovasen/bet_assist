@@ -5,6 +5,8 @@ import os
 from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
+from celery.schedules import crontab
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bet_assist.settings')
 
 app = Celery('bet_assist')
@@ -15,8 +17,13 @@ app = Celery('bet_assist')
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
-
-
+app.conf.beat_schedule = {
+    'every-2-minutes': {
+        'task': 'tasks.scrape_volume',
+        'schedule': 60.0,
+    },
+}
+app.conf.timezone = 'UTC'
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
 
