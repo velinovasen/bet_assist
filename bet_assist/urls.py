@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from games.views import index as volume_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('games/', include('games.urls')),
+    path('traffic/', volume_view, name='traffic')
 ]
 

@@ -1,5 +1,4 @@
-import os
-import django
+import sys, os, django
 from selenium.webdriver import ChromeOptions, Chrome
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
@@ -7,13 +6,12 @@ from time import sleep
 import re
 from django.core.wsgi import get_wsgi_application
 
+sys.path.append('C:\\Users\\Asen\\Desktop\\django-bet-assist\\bet_assist')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bet_assist.settings')
-os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 django.setup()
 application = get_wsgi_application()
 
 from games.models import BetsVolume
-
 
 def scrape():
     WEB_LINKS = {
